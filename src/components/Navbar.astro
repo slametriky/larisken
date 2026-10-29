@@ -24,21 +24,14 @@ import { Store, Smartphone, ArrowRight, Menu, X } from '@lucide/astro';
       <a href="#cara-kerja" class="transition-colors hover:text-foreground">Cara Kerja</a>
       <a href="#fitur" class="transition-colors hover:text-foreground">Fitur</a>
       <a href="#simulasi-ongkir" class="transition-colors hover:text-foreground">Simulasi Ongkir</a>
+      <a href="https://demolarisken.vercel.app/" target="_blank" rel="noopener noreferrer" class="transition-colors text-primary font-semibold hover:text-primary/80 flex items-center gap-1">
+        <span>Demo</span>
+        <span class="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full font-bold">Live</span>
+      </a>
       <a href="#faq" class="transition-colors hover:text-foreground">FAQ</a>
     </nav>
 
     <!-- Right Actions Desktop -->
-    <div class="hidden sm:flex items-center gap-3">
-      <Button variant="outline" size="sm" as="a" href="#aplikasi" class="font-medium">
-        <Smartphone data-icon="inline-start" />
-        Login Toko
-      </Button>
-      <Button size="sm" as="a" href="#daftar">
-        Buka Toko
-        <ArrowRight data-icon="inline-end" />
-      </Button>
-    </div>
-
     <!-- Mobile Menu Button (Accessible toggle) -->
     <button
       id="mobile-menu-btn"
@@ -58,6 +51,10 @@ import { Store, Smartphone, ArrowRight, Menu, X } from '@lucide/astro';
       <a href="#cara-kerja" class="px-2 py-1.5 rounded-md hover:bg-accent hover:text-foreground">Cara Kerja</a>
       <a href="#fitur" class="px-2 py-1.5 rounded-md hover:bg-accent hover:text-foreground">Fitur</a>
       <a href="#simulasi-ongkir" class="px-2 py-1.5 rounded-md hover:bg-accent hover:text-foreground">Simulasi Ongkir</a>
+      <a href="https://demolarisken.vercel.app/" target="_blank" rel="noopener noreferrer" class="px-2 py-1.5 rounded-md text-primary font-bold hover:bg-primary/10 flex items-center justify-between">
+        <span>Coba Demo Toko</span>
+        <span class="text-[10px] bg-primary text-primary-foreground px-1.5 py-0.5 rounded-full">Live</span>
+      </a>
       <a href="#faq" class="px-2 py-1.5 rounded-md hover:bg-accent hover:text-foreground">FAQ</a>
     </nav>
     <div class="pt-2 flex flex-col gap-2">

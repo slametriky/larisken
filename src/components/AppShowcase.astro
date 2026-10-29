@@ -8,7 +8,8 @@ import {
   TrendingUp, 
   Check, 
   ArrowRight,
-  ShieldCheck
+  ShieldCheck,
+  ExternalLink
 } from '@lucide/astro';
 ---
 
@@ -63,10 +64,27 @@ import {
           </div>
         </div>
 
-        <div class="pt-2">
-          <Button size="lg" as="a" href="#daftar">
+        <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <Button 
+            size="lg" 
+            as="a" 
+            href="https://demolarisken.vercel.app/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="shadow-md font-bold"
+          >
+            <span>Coba Demo Toko Langsung</span>
+            <ExternalLink data-icon="inline-end" class="size-4" />
+          </Button>
+
+          <Button 
+            size="lg" 
+            variant="outline" 
+            as="a" 
+            href="#daftar"
+          >
             Daftar Sekarang
-            <ArrowRight data-icon="inline-end" />
+            <ArrowRight data-icon="inline-end" class="size-4" />
           </Button>
         </div>
       </div>

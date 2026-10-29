@@ -1,11 +1,13 @@
 ---
 import Badge from '@/components/ui/Badge.astro';
 import Accordion from '@/components/ui/Accordion.astro';
+import Button from '@/components/ui/Button.astro';
+import { MessageCircle } from '@lucide/astro';
 
 const faqs = [
   {
     question: "Apakah aplikasi ini gratis?",
-    answer: "Ya, gratis untuk 1 bulan pertama! Setelah masa uji coba 1 bulan selesai, biaya berlangganan sangat terjangkau yaitu hanya Rp 49.000 per bulan, tanpa ada potongan komisi dari setiap transaksi penjualan Anda."
+    answer: "Ya, gratis untuk 1 bulan pertama! Setelah masa uji coba 1 bulan selesai, biaya berlangganan sangat terjangkau yaitu hanya Rp 50.000 per bulan, tanpa ada potongan komisi dari setiap transaksi penjualan Anda."
   },
   {
     question: "Apakah pembeli harus mengunduh aplikasi untuk memesan?",
@@ -59,6 +61,33 @@ const faqs = [
           </Accordion>
         ))}
       </div>
+    </div>
+
+    <!-- Card Bantuan WhatsApp -->
+    <div class="mt-8 rounded-2xl border border-primary/20 bg-primary/5 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+        <div class="size-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+          <MessageCircle class="size-6" />
+        </div>
+        <div class="space-y-1">
+          <h4 class="font-bold text-base sm:text-lg text-foreground">
+            Masih ada pertanyaan atau bingung cara daftarnya?
+          </h4>
+          <p class="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+            Konsultasikan dengan tim kami. Kami siap bantu pandu setup tokomu sampai siap jualan online!
+          </p>
+        </div>
+      </div>
+      <Button 
+        as="a" 
+        href="https://wa.me/6281273120226?text=Halo%20tim%20Larisken%2C%20saya%20ingin%20tanya-tanya%20seputar%20buka%20toko%20online%20di%20Larisken.id" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="shrink-0 w-full sm:w-auto shadow-sm"
+      >
+        <MessageCircle data-icon="inline-start" />
+        <span>Chat via WhatsApp</span>
+      </Button>
     </div>
 
   </div>
