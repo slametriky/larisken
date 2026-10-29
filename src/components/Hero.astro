@@ -1,0 +1,213 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { 
+  Sparkles, 
+  MapPin, 
+  Smartphone, 
+  BellRing, 
+  ArrowRight, 
+  CheckCircle2, 
+  Navigation,
+  Percent
+} from '@lucide/astro';
+---
+
+<section id="daftar" class="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-28">
+  <!-- Decorative subtle background glow -->
+  <div class="pointer-events-none absolute -top-40 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-20rem]" aria-hidden="true">
+    <div class="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-primary/20 via-primary/10 to-transparent opacity-40"></div>
+  </div>
+
+  <div class="container mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="flex flex-col items-center text-center">
+      
+      <!-- Main Headline -->
+      <h1 class="max-w-4xl text-3xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:leading-[1.15]">
+        Solusi Praktis Jualan Online, <br class="hidden sm:inline" />
+        <span class="text-primary bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
+          Bebas Potongan Komisi
+        </span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg md:text-xl leading-relaxed">
+        Tinggalkan komisi 20% yang memberatkan dan repotnya rekap chat WhatsApp. 
+        Pelanggan bisa <span class="font-semibold text-foreground">pesan langsung tanpa antri</span> dari web <span class="font-semibold text-foreground">namatoko.larisken.id</span>, 
+        lengkap dengan <span class="font-semibold text-foreground">hitung ongkir otomatis</span>, 
+        pembayaran langsung ke tokomu, dan <span class="font-semibold text-foreground">otomatis dipromosikan di direktori mitra Larisken.id</span>!
+      </p>
+
+      <!-- Subdomain Builder Interactive Bar -->
+      <div class="mt-8 w-full max-w-xl">
+        <form class="flex flex-col sm:flex-row items-center gap-2 rounded-xl border border-input bg-card p-2 shadow-lg ring-1 ring-black/5" onsubmit="event.preventDefault();">
+          <div class="flex h-11 w-full items-center rounded-lg bg-muted/60 px-3 text-sm text-muted-foreground">
+            <span class="font-mono text-muted-foreground select-none">https://</span>
+            <input 
+              id="subdomain-input"
+              type="text" 
+              placeholder="nama-tokomu" 
+              class="w-full bg-transparent px-1 font-semibold text-foreground focus:outline-none placeholder:text-muted-foreground/60 placeholder:font-normal"
+            />
+            <span class="font-semibold text-primary select-none">.larisken.id</span>
+          </div>
+          <Button type="button" size="lg" class="w-full sm:w-auto shrink-0 shadow-md">
+            <span>Buka Toko Gratis</span>
+            <ArrowRight data-icon="inline-end" />
+          </Button>
+        </form>
+      </div>
+
+      <!-- Quick Benefit Bullets -->
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-y-3 gap-x-6 text-xs sm:text-sm font-medium text-muted-foreground">
+        <div class="flex items-center gap-2">
+          <CheckCircle2 class="size-4 text-primary" />
+          <span>Pesan Cepat Tanpa Antre</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <CheckCircle2 class="size-4 text-primary" />
+          <span>Order Masuk Aplikasi (Bukan WA)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <CheckCircle2 class="size-4 text-primary" />
+          <span>Hitung Ongkir Otomatis</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <CheckCircle2 class="size-4 text-primary" />
+          <span>Tracing Status Order</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <CheckCircle2 class="size-4 text-primary" />
+          <span>Pembayaran Langsung ke Toko</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <CheckCircle2 class="size-4 text-primary" />
+          <span>Otomatis Masuk Direktori Mitra Larisken.id</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Dual Interface Showcase Mockup -->
+    <div class="mt-14 relative mx-auto max-w-4xl rounded-2xl border border-border bg-gradient-to-b from-muted/40 to-muted/10 p-4 sm:p-8 shadow-2xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+        
+        <!-- SIDE 1: What Customer Sees (Website Toko on Mobile) -->
+        <div class="flex flex-col rounded-xl border border-border bg-card p-5 shadow-sm">
+          <div class="flex items-center justify-between border-b border-border pb-3 mb-4">
+            <div class="flex items-center gap-2">
+              <span class="size-3 rounded-full bg-red-400"></span>
+              <span class="size-3 rounded-full bg-amber-400"></span>
+              <span class="size-3 rounded-full bg-emerald-400"></span>
+              <span class="ml-2 text-xs font-mono text-muted-foreground truncate max-w-[150px]">
+                dapurpakslamet.larisken.id
+              </span>
+            </div>
+            <Badge variant="secondary" class="text-[10px]">Tampilan Web Pembeli</Badge>
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="font-bold text-foreground text-sm">Dapur Pak Slamet</h4>
+                <p class="text-xs text-muted-foreground">Spesialis Kuliner & Ayam Geprek</p>
+              </div>
+              <Badge variant="outline" class="text-[10px] text-emerald-600 border-emerald-300 bg-emerald-50">Buka</Badge>
+            </div>
+
+            <!-- Item Card in Cart -->
+            <div class="rounded-lg border border-border/80 bg-muted/30 p-2.5 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <div class="size-8 rounded bg-primary/10 flex items-center justify-center font-bold text-primary">1x</div>
+                <div>
+                  <p class="font-semibold text-foreground">Paket Geprek Sambal Matah</p>
+                  <p class="text-[11px] text-muted-foreground">Level 3 • Es Teh Manis</p>
+                </div>
+              </div>
+              <span class="font-bold text-foreground">Rp 28.000</span>
+            </div>
+
+            <!-- In-city Delivery calculation badge -->
+            <div class="rounded-lg border border-primary/20 bg-primary/5 p-3 space-y-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="flex items-center gap-1.5 text-muted-foreground font-medium">
+                  <MapPin class="size-3.5 text-primary" /> Titik Alamat Antar
+                </span>
+                <span class="font-bold text-foreground">Jarak 3.2 km</span>
+              </div>
+              <div class="flex items-center justify-between text-xs pt-1 border-t border-primary/10">
+                <span class="text-muted-foreground">Ongkos Kirim Otomatis:</span>
+                <span class="font-bold text-primary">Rp 9.000</span>
+              </div>
+            </div>
+
+            <!-- Tracing Status Bar -->
+            <div class="rounded-lg bg-secondary/80 p-2.5 flex items-center justify-between text-xs">
+              <span class="flex items-center gap-1.5 font-medium text-foreground">
+                <Navigation class="size-3.5 text-primary" />
+                Tracing Order:
+              </span>
+              <span class="text-[11px] font-semibold text-primary">Pesanan Sedang Diproses</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIDE 2: What Merchant Gets (Larisken Merchant App) -->
+        <div class="flex flex-col rounded-xl border-2 border-primary/40 bg-card p-5 shadow-md relative">
+          <!-- Notification Pill -->
+          <div class="absolute -top-3.5 right-4 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-[11px] font-bold text-primary-foreground shadow-sm animate-bounce">
+            <BellRing class="size-3" /> Order Baru Masuk!
+          </div>
+
+          <div class="flex items-center justify-between border-b border-border pb-3 mb-4">
+            <div class="flex items-center gap-2">
+              <Smartphone class="size-4 text-primary" />
+              <span class="text-xs font-bold text-foreground">Aplikasi Toko Larisken</span>
+            </div>
+            <span class="text-[11px] text-muted-foreground font-mono">Order #LK-9021</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="rounded-lg bg-emerald-500/10 border border-emerald-500/20 p-3">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-emerald-800 dark:text-emerald-300">Total Transaksi</span>
+                <span class="text-base font-extrabold text-foreground">Rp 37.000</span>
+              </div>
+              <p class="text-[11px] text-muted-foreground mt-0.5">Metode Bayar: Langsung ke Toko (Lunas)</p>
+            </div>
+
+            <div class="space-y-1.5 text-xs">
+              <div class="flex justify-between text-muted-foreground">
+                <span>Nama Pembeli:</span>
+                <span class="font-semibold text-foreground">Dimas Satria</span>
+              </div>
+              <div class="flex justify-between text-muted-foreground">
+                <span>Alamat Tujuan:</span>
+                <span class="font-medium text-foreground truncate max-w-[180px]">Jl. Kenanga No. 14, RT 02</span>
+              </div>
+              <div class="flex justify-between text-muted-foreground">
+                <span>Biaya Ongkir Toko:</span>
+                <span class="font-semibold text-primary">Rp 9.000 (Jarak 3.2 km)</span>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <Button size="sm" class="w-full text-xs">
+                Terima & Siapkan Pesanan
+              </Button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-5 text-center">
+        <p class="text-xs text-muted-foreground">
+          💡 <strong>Tanpa perantara chat!</strong> Pelanggan cukup checkout via link web di bio, orderan Anda langsung muncul seketika di aplikasi dengan alarm notifikasi.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+

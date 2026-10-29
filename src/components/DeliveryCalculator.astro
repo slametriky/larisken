@@ -1,0 +1,157 @@
+---
+import Badge from '@/components/ui/Badge.astro';
+import Button from '@/components/ui/Button.astro';
+import { MapPin, Navigation, Clock, Calculator, ShieldCheck } from '@lucide/astro';
+---
+
+<section id="simulasi-ongkir" class="py-16 md:py-24 border-y border-border/60 bg-card">
+  <div class="container mx-auto max-w-5xl px-4 sm:px-6">
+    
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <Badge variant="secondary" class="mb-3">Simulasi Interaktif</Badge>
+      <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
+        Simulasi Hitung Ongkir Otomatis
+      </h2>
+      <p class="mt-4 text-sm sm:text-base text-muted-foreground">
+        Geser jarak pengantaran di bawah untuk melihat bagaimana sistem Larisken.id menghitung biaya ongkir secara otomatis dan memudahkan pembeli melakukan tracing status order.
+      </p>
+    </div>
+
+    <div class="rounded-2xl border border-border bg-muted/20 p-6 sm:p-10 shadow-lg">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Controls Column -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <label for="distance-range" class="text-sm font-semibold text-foreground flex items-center gap-2">
+                <MapPin class="size-4 text-primary" /> Jarak Pengantaran
+              </label>
+              <span id="distance-display" class="text-base font-black text-primary bg-primary/10 px-3 py-1 rounded-md">
+                3.5 km
+              </span>
+            </div>
+            
+            <input 
+              id="distance-range" 
+              type="range" 
+              min="1" 
+              max="15" 
+              step="0.5" 
+              value="3.5"
+              class="w-full h-2.5 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+            />
+            
+            <div class="flex justify-between text-xs text-muted-foreground">
+              <span>1 km (Dekat)</span>
+              <span>7.5 km (Sedang)</span>
+              <span>15 km (Maksimal)</span>
+            </div>
+          </div>
+
+          <div class="rounded-xl border border-border bg-card p-4 space-y-3">
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-muted-foreground">Tarif Dasar (1-2 km):</span>
+              <span class="font-medium text-foreground">Rp 6.000</span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-muted-foreground">Tarif per KM berikutnya:</span>
+              <span class="font-medium text-foreground">Rp 2.000 / km</span>
+            </div>
+            <div class="border-t border-border pt-2 flex items-center justify-between">
+              <span class="font-semibold text-foreground">Biaya Ongkir Diterima Kurir:</span>
+              <span id="fee-display" class="text-xl font-extrabold text-primary">Rp 9.000</span>
+            </div>
+          </div>
+
+          <p class="text-xs text-muted-foreground flex items-center gap-2">
+            <ShieldCheck class="size-4 text-primary shrink-0" />
+            <span>Skema tarif per kilometer dapat Anda sesuaikan sendiri dengan mudah di Aplikasi Toko Larisken.</span>
+          </p>
+        </div>
+
+        <!-- Tracing Status Column Preview -->
+        <div class="lg:col-span-6">
+          <div class="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-border pb-3">
+              <div class="flex items-center gap-2">
+                <Navigation class="size-4 text-primary" />
+                <span class="font-bold text-sm text-foreground">Tracing Status Order</span>
+              </div>
+              <span id="eta-display" class="text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full flex items-center gap-1">
+                <Clock class="size-3" /> Est. 20 Menit
+              </span>
+            </div>
+
+            <!-- Steps timeline -->
+            <div class="space-y-3 text-xs">
+              <div class="flex items-start gap-3">
+                <div class="size-5 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-[10px] mt-0.5">✓</div>
+                <div>
+                  <p class="font-bold text-foreground">Pesanan Masuk ke Aplikasi Toko</p>
+                  <p class="text-muted-foreground">Order diterima dan toko mulai memproses</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="size-5 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-[10px] mt-0.5">✓</div>
+                <div>
+                  <p class="font-bold text-foreground">Pesanan Selesai Disiapkan</p>
+                  <p class="text-muted-foreground">Dikemas rapi & siap diantar kurir toko</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="size-5 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-[10px] mt-0.5">●</div>
+                <div>
+                  <p class="font-bold text-primary">Pesanan Sedang Diantar</p>
+                  <p class="text-muted-foreground">Kurir toko bergerak menuju alamat tujuan</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 opacity-60">
+                <div class="size-5 rounded-full border border-border flex items-center justify-center font-bold text-[10px] mt-0.5">○</div>
+                <div>
+                  <p class="font-medium text-foreground">Pesanan Selesai Diterima</p>
+                  <p class="text-muted-foreground">Pembeli menerima pesanan dengan baik</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <Button as="a" href="#daftar" class="w-full justify-center">
+                Mulai Pasang di Tokomu Sekarang
+              </Button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const distanceSlider = document.getElementById('distance-range') as HTMLInputElement | null;
+  const distanceDisplay = document.getElementById('distance-display');
+  const feeDisplay = document.getElementById('fee-display');
+  const etaDisplay = document.getElementById('eta-display');
+
+  function updateCalculation() {
+    if (!distanceSlider || !distanceDisplay || !feeDisplay || !etaDisplay) return;
+    const km = parseFloat(distanceSlider.value);
+    distanceDisplay.textContent = `${km.toFixed(1)} km`;
+
+    // Pricing calculation: base Rp 6.000 for up to 2km, then Rp 2.000/km
+    let fee = 6000;
+    if (km > 2) {
+      fee += Math.ceil(km - 2) * 2000;
+    }
+    feeDisplay.textContent = `Rp ${fee.toLocaleString('id-ID')}`;
+
+    // ETA calculation: ~5 mins prep + (km * 4 mins travel)
+    const eta = Math.round(7 + (km * 3.8));
+    etaDisplay.innerHTML = `<svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Est. ${eta} Menit`;
+  }
+
+  distanceSlider?.addEventListener('input', updateCalculation);
+</script>
+

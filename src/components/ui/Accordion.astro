@@ -1,0 +1,32 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { cn } from '@/lib/utils';
+import { ChevronDown } from '@lucide/astro';
+
+export interface Props extends HTMLAttributes<'details'> {
+  title: string;
+  class?: string;
+}
+
+const { title, class: className, ...props } = Astro.props;
+---
+
+<details
+  class={cn(
+    "group border-b border-border py-4 transition-all duration-200",
+    className
+  )}
+  {...props}
+>
+  <summary class="flex cursor-pointer list-none items-center justify-between text-left font-medium transition-all hover:underline [&::-webkit-details-marker]:hidden">
+    <span class="text-base text-foreground font-semibold">{title}</span>
+    <ChevronDown
+      data-icon="inline-end"
+      class="text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+    />
+  </summary>
+  <div class="pt-3 pb-1 text-sm text-muted-foreground leading-relaxed">
+    <slot />
+  </div>
+</details>
+

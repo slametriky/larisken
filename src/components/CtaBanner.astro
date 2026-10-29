@@ -1,0 +1,49 @@
+---
+import Button from '@/components/ui/Button.astro';
+import { ArrowRight, Sparkles, CheckCircle2 } from '@lucide/astro';
+---
+
+<section class="py-16 md:py-20 relative overflow-hidden bg-primary text-primary-foreground">
+  <!-- Subtle background pattern -->
+  <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+
+  <div class="container mx-auto max-w-5xl px-4 sm:px-6 relative z-10 text-center">
+    <div class="inline-flex items-center gap-2 rounded-full bg-white/20 px-3.5 py-1 text-xs font-semibold backdrop-blur-sm mb-6 text-white">
+      <Sparkles class="size-3.5" />
+      <span>Larisken.id • Solusi Praktis Jualan Online</span>
+    </div>
+
+    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight text-white max-w-3xl mx-auto">
+      Siap Punya Web Toko Sendiri Tanpa Terpotong Komisi Besar?
+    </h2>
+
+    <p class="mt-5 text-base sm:text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
+      Daftarkan tokomu sekarang, dapatkan subdomain instan (<span class="underline font-semibold">namatoko.larisken.id</span>), dan rasakan mudahnya menerima order otomatis langsung di aplikasi kasir tokomu.
+    </p>
+
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+      <Button 
+        size="lg" 
+        as="a" 
+        href="#daftar" 
+        class="w-full sm:w-auto bg-white text-emerald-800 hover:bg-white/90 font-bold shadow-lg"
+      >
+        <span>Buka Toko Gratis Sekarang</span>
+        <ArrowRight data-icon="inline-end" />
+      </Button>
+    </div>
+
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-white/80 font-medium">
+      <span class="flex items-center gap-1.5">
+        <CheckCircle2 class="size-4 text-white" /> Aktif dalam 2 Menit
+      </span>
+      <span class="flex items-center gap-1.5">
+        <CheckCircle2 class="size-4 text-white" /> Bebas Biaya Komisi Transaksi
+      </span>
+      <span class="flex items-center gap-1.5">
+        <CheckCircle2 class="size-4 text-white" /> Aplikasi Toko Gratis
+      </span>
+    </div>
+  </div>
+</section>
+

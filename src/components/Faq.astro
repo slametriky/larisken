@@ -1,0 +1,70 @@
+---
+import Badge from '@/components/ui/Badge.astro';
+import Accordion from '@/components/ui/Accordion.astro';
+
+const faqs = [
+  {
+    question: "Apakah aplikasi ini gratis?",
+    answer: "Ya, gratis untuk 1 bulan pertama! Setelah masa uji coba 1 bulan selesai, biaya berlangganan sangat terjangkau yaitu hanya Rp 50.000 per bulan, tetap tanpa ada potongan komisi dari setiap transaksi penjualan Anda."
+  },
+  {
+    question: "Apakah pembeli harus mengunduh aplikasi untuk memesan?",
+    answer: "Tidak perlu sama sekali! Pembeli cukup mengeklik link website tokomu (misal: namatoko.larisken.id) yang Anda pasang di bio medsos atau WhatsApp. Web toko akan langsung terbuka dengan cepat di browser smartphone mereka tanpa perlu unduh aplikasi ataupun daftar akun yang rumit."
+  },
+  {
+    question: "Bagaimana Larisken membantu toko agar pembeli bebas antre?",
+    answer: "Dengan website namatoko.larisken.id, pembeli bisa melihat menu dan memesan terlebih dahulu dari mana saja. Toko bisa langsung memproses pesanan lebih awal, sehingga pembeli bebas dari antrean panjang yang membosankan di kasir toko fisik."
+  },
+  {
+    question: "Bagaimana cara pesanan masuk ke toko saya?",
+    answer: "Sebagai pemilik toko, Anda tinggal login ke Aplikasi Toko Larisken di smartphone Anda dengan akun toko yang telah didaftarkan. Begitu pembeli menyelesaikan pesanan di web tokomu, aplikasi akan langsung berdering kencang dengan notifikasi pesanan baru. Anda tinggal klik tombol 'Terima & Siapkan Pesanan'."
+  },
+  {
+    question: "Bagaimana sistem pengantaran pesanan ke pembeli?",
+    answer: "Pengantaran dapat dilakukan langsung oleh kurir toko Anda sendiri atau kurir langganan dengan tarif ongkir otomatis yang sudah dihitung oleh sistem."
+  },
+  {
+    question: "Bagaimana cara kerja hitung ongkir otomatis?",
+    answer: "Sistem secara otomatis mengukur jarak titik toko Anda ke alamat titik antar pembeli. Anda memiliki kendali penuh untuk mengatur tarif dasar (misalnya Rp 6.000 untuk 2 KM pertama) dan tarif per kilometer berikutnya langsung dari aplikasi tokomu."
+  },
+  {
+    question: "Bagaimana cara kerja fitur tracing order?",
+    answer: "Tracing order adalah pelacakan status pesanan secara transparan. Pembeli dapat memantau langsung apakah pesanan sudah 'Diterima Toko', 'Sedang Diproses', 'Siap Diantar Kurir Toko', hingga 'Pesanan Selesai' dari halaman web tanpa perlu chat manual berulang kali."
+  },
+  {
+    question: "Kemana uang pembayaran pembeli masuk?",
+    answer: "Pembayaran 100% langsung masuk ke rekening bank atau QRIS milik toko Anda sendiri (maupun bayar tunai/COD saat pesanan diterima). Larisken tidak menahan dana penjualan dan bebas potongan komisi per transaksi."
+  },
+  {
+    question: "Apakah toko saya otomatis dipromosikan di web Larisken.id?",
+    answer: "Ya! Setiap toko yang mendaftar akan otomatis masuk ke daftar direktori mitra terdaftar di web Larisken.id. Calon pembeli yang membuka Larisken dapat melihat list tokomu dan langsung mengunjungi website tokomu untuk berbelanja."
+  }
+];
+---
+
+<section id="faq" class="py-16 md:py-24 bg-muted/20">
+  <div class="container mx-auto max-w-4xl px-4 sm:px-6">
+    
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <Badge variant="secondary" class="mb-3">Tanya Jawab</Badge>
+      <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
+        Pertanyaan Seputar Larisken.id
+      </h2>
+      <p class="mt-4 text-sm sm:text-base text-muted-foreground">
+        Punya pertanyaan sebelum bergabung? Berikut jawaban atas hal-hal yang sering ditanyakan pemilik toko.
+      </p>
+    </div>
+
+    <div class="rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-sm">
+      <div class="divide-y divide-border">
+        {faqs.map((faq) => (
+          <Accordion title={faq.question}>
+            {faq.answer}
+          </Accordion>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+

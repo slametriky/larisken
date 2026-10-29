@@ -1,0 +1,102 @@
+---
+import Card from '@/components/ui/Card.astro';
+import CardHeader from '@/components/ui/CardHeader.astro';
+import CardTitle from '@/components/ui/CardTitle.astro';
+import CardDescription from '@/components/ui/CardDescription.astro';
+import CardContent from '@/components/ui/CardContent.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { 
+  Navigation, 
+  Smartphone, 
+  Globe, 
+  QrCode, 
+  ClipboardList, 
+  PercentCircle,
+  Megaphone,
+  MapPin,
+  Clock
+} from '@lucide/astro';
+
+const features = [
+  {
+    icon: Navigation,
+    title: "Hitung Ongkir Otomatis & Tracing Order",
+    description: "Biaya ongkos kirim terhitung secara otomatis saat pembeli menentukan alamat antar. Pembeli dan toko dapat memantau status pesanan (tracing order) secara transparan.",
+    badge: "Otomatis & Akurat"
+  },
+  {
+    icon: Smartphone,
+    title: "Order Otomatis & Bebas Antre",
+    description: "Pelanggan bisa memesan dari mana saja tanpa perlu antre di toko. Begitu pesanan dibuat di web, aplikasi tokomu berdering seketika dan pesanan siap diproses.",
+    badge: "Praktis & Bebas Antre"
+  },
+  {
+    icon: Globe,
+    title: "Subdomain Eksklusif Toko",
+    description: "Langsung miliki alamat web resmi namatoko.larisken.id yang ringan dibuka dan estetik di layar HP. Tinggal tempel di bio medsos atau pajang di banner tokomu.",
+    badge: "Branding Mandiri"
+  },
+  {
+    icon: Megaphone,
+    title: "Otomatis Dipromosikan di Larisken.id",
+    description: "Toko Anda otomatis masuk ke direktori & daftar mitra terdaftar di web Larisken.id, membantu menjangkau lebih banyak pembeli baru di sekitar Anda tanpa biaya promosi tambahan.",
+    badge: "Promosi Gratis"
+  },
+  {
+    icon: QrCode,
+    title: "Pembayaran Langsung ke Toko",
+    description: "Uang pembayaran langsung masuk ke rekening atau QRIS milik toko Anda sendiri (maupun tunai/COD). Bebas potongan komisi platform dan dana tidak ditahan perantara.",
+    badge: "Langsung ke Penjual"
+  },
+  {
+    icon: ClipboardList,
+    title: "Manajemen Order & Menu Praktis",
+    description: "Pantau pesanan masuk secara real-time, atur ketersediaan menu, rincian pesanan, dan status kesiapan pesanan langsung dari genggaman HP Anda.",
+    badge: "Fokus Kelola Order"
+  },
+  {
+    icon: PercentCircle,
+    title: "Keuntungan 100% Milik Anda",
+    description: "Bebas dari potongan komisi 20% - 25% yang memangkas laba bersih Anda. Anda tidak perlu menaikkan harga jual di web, pelanggan pun lebih setia berbelanja.",
+    badge: "Bebas Komisi"
+  }
+];
+---
+
+<section id="fitur" class="py-16 md:py-24 bg-muted/20">
+  <div class="container mx-auto max-w-6xl px-4 sm:px-6">
+    
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <Badge variant="secondary" class="mb-3">Fitur Andalan</Badge>
+      <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
+        Didesain Khusus untuk Ekosistem Toko Lokal
+      </h2>
+      <p class="mt-4 text-sm sm:text-base text-muted-foreground">
+        Semua fitur yang Anda butuhkan untuk mengelola penjualan makanan, minuman, dan produk lokal dalam satu alur yang ringkas.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {features.map((item) => (
+        <Card class="border-border bg-card transition-all duration-200 hover:shadow-md hover:border-primary/40 flex flex-col justify-between">
+          <CardHeader>
+            <div class="flex items-center justify-between mb-4">
+              <div class="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                <item.icon class="size-5" />
+              </div>
+              <Badge variant="outline" class="text-[11px] font-medium">{item.badge}</Badge>
+            </div>
+            <CardTitle class="text-lg">{item.title}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-sm text-muted-foreground leading-relaxed">
+              {item.description}
+            </p>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+
+  </div>
+</section>
+

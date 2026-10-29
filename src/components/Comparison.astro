@@ -1,0 +1,133 @@
+---
+import Card from '@/components/ui/Card.astro';
+import CardHeader from '@/components/ui/CardHeader.astro';
+import CardTitle from '@/components/ui/CardTitle.astro';
+import CardDescription from '@/components/ui/CardDescription.astro';
+import CardContent from '@/components/ui/CardContent.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { XCircle, CheckCircle2, AlertTriangle, ShieldCheck } from '@lucide/astro';
+---
+
+<section id="keunggulan" class="py-16 md:py-24 bg-muted/30 border-y border-border/60">
+  <div class="container mx-auto max-w-6xl px-4 sm:px-6">
+    
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <Badge variant="secondary" class="mb-3">Bandingkan Sendiri</Badge>
+      <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
+        Kenapa Toko Anda Butuh <span class="text-primary">Larisken.id</span>?
+      </h2>
+      <p class="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
+        Solusi yang menggabungkan kemudahan order aplikasi food delivery, tanpa memotong komisi besar dan tanpa ribetnya balas chat satu per satu.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+      
+      <!-- Option 1: Superapp Delivery -->
+      <Card class="border-border bg-card/60 flex flex-col justify-between">
+        <CardHeader>
+          <div class="flex items-center justify-between mb-2">
+            <Badge variant="outline" class="text-xs">Marketplace / Superapp</Badge>
+            <XCircle class="size-5 text-red-500" />
+          </div>
+          <CardTitle class="text-lg">Platform Food Delivery</CardTitle>
+          <CardDescription>Bergantung penuh pada aplikasi pihak ketiga</CardDescription>
+        </CardHeader>
+        <CardContent class="space-y-3.5 text-xs sm:text-sm text-muted-foreground flex-1">
+          <div class="flex items-start gap-2.5">
+            <XCircle class="size-4 shrink-0 text-red-500 mt-0.5" />
+            <span><strong>Komisi 20% - 25%+</strong> per transaksi memangkas keuntungan toko.</span>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <XCircle class="size-4 shrink-0 text-red-500 mt-0.5" />
+            <span>Harga makanan terpaksa dinaikkan, pelanggan jadi enggan pesan.</span>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <XCircle class="size-4 shrink-0 text-red-500 mt-0.5" />
+            <span>Database pelanggan milik aplikasi, bukan milik toko Anda.</span>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <XCircle class="size-4 shrink-0 text-red-500 mt-0.5" />
+            <span>Banyak kompetitor yang direkomendasikan tepat di sebelah tokomu.</span>
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- Option 2: Manual WA -->
+      <Card class="border-border bg-card/60 flex flex-col justify-between">
+        <CardHeader>
+          <div class="flex items-center justify-between mb-2">
+            <Badge variant="outline" class="text-xs">Chat WhatsApp Manual</Badge>
+            <AlertTriangle class="size-5 text-amber-500" />
+          </div>
+          <CardTitle class="text-lg">Jualan via Chat WA</CardTitle>
+          <CardDescription>Mengandalkan pesan teks dan rekap manual</CardDescription>
+        </CardHeader>
+        <CardContent class="space-y-3.5 text-xs sm:text-sm text-muted-foreground flex-1">
+          <div class="flex items-start gap-2.5">
+            <AlertTriangle class="size-4 shrink-0 text-amber-500 mt-0.5" />
+            <span>Repot hitung ongkir manual buka maps satu per satu ke setiap pelanggan.</span>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <AlertTriangle class="size-4 shrink-0 text-amber-500 mt-0.5" />
+            <span>Chat menumpuk di jam sibuk, order rawan terlewat atau salah catat.</span>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <AlertTriangle class="size-4 shrink-0 text-amber-500 mt-0.5" />
+            <span>Pelanggan sering menanyakan "pesanan saya sudah sampai mana?".</span>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <AlertTriangle class="size-4 shrink-0 text-amber-500 mt-0.5" />
+            <span>Tidak ada sistem manajemen pesanan otomatis yang rapi dan terpusat.</span>
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- Option 3: Larisken.id (Highlight) -->
+      <Card class="border-2 border-primary bg-card shadow-xl relative flex flex-col justify-between scale-[1.02] md:scale-105">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+          <span class="rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground shadow">
+            Solusi Terbaik
+          </span>
+        </div>
+        <CardHeader>
+          <div class="flex items-center justify-between mb-2">
+            <Badge variant="default" class="text-xs">Larisken.id</Badge>
+            <CheckCircle2 class="size-5 text-primary" />
+          </div>
+          <CardTitle class="text-lg text-primary">Web Toko + Aplikasi Toko</CardTitle>
+          <CardDescription>Otomatis, profesional & keuntungan 100% utuh</CardDescription>
+        </CardHeader>
+        <CardContent class="space-y-3.5 text-xs sm:text-sm text-foreground flex-1">
+          <div class="flex items-start gap-2.5">
+            <CheckCircle2 class="size-4 shrink-0 text-primary mt-0.5" />
+            <span><strong>Pembayaran Langsung ke Toko:</strong> Pembeli bayar langsung ke rekening/QRIS tokomu tanpa potongan komisi.</span>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <CheckCircle2 class="size-4 shrink-0 text-primary mt-0.5" />
+            <span><strong>Order Masuk ke Aplikasi:</strong> Berdering otomatis di HP tokomu, gak perlu balas chat WA manual.</span>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <CheckCircle2 class="size-4 shrink-0 text-primary mt-0.5" />
+            <span><strong>Pesan Cepat Tanpa Antre:</strong> Pembeli tidak perlu antre berdiri di kasir, order langsung masuk dan siap diproses.</span>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <CheckCircle2 class="size-4 shrink-0 text-primary mt-0.5" />
+            <span><strong>Hitung Ongkir Otomatis:</strong> Tarif ongkir dihitung otomatis dan status pesanan bisa di-<em>tracing</em>.</span>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <CheckCircle2 class="size-4 shrink-0 text-primary mt-0.5" />
+            <span><strong>Merek Toko Sendiri:</strong> Punya alamat web resmi (<em>namatoko.larisken.id</em>) di bio medsos.</span>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <CheckCircle2 class="size-4 shrink-0 text-primary mt-0.5" />
+            <span><strong>Otomatis Dipromosikan:</strong> Tokomu langsung terdaftar di list direktori mitra Larisken.id untuk menjangkau pembeli baru.</span>
+          </div>
+        </CardContent>
+      </Card>
+
+    </div>
+
+  </div>
+</section>
+

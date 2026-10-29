@@ -1,0 +1,31 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { cn } from '@/lib/utils';
+
+export interface Props extends HTMLAttributes<'div'> {
+  variant?: 'default' | 'destructive';
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  class: className,
+  ...props
+} = Astro.props;
+
+const variants = {
+  default: "bg-background text-foreground",
+  destructive: "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
+};
+
+const classes = cn(
+  "relative w-full rounded-lg border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current",
+  variants[variant],
+  className
+);
+---
+
+<div role="alert" class={classes} {...props}>
+  <slot />
+</div>
+

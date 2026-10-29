@@ -1,0 +1,54 @@
+---
+import Separator from '@/components/ui/Separator.astro';
+import { Store, ShieldCheck, Heart } from '@lucide/astro';
+---
+
+<footer class="bg-card border-t border-border/80 pt-14 pb-10 text-muted-foreground">
+  <div class="container mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="flex flex-col md:flex-row justify-between gap-8 mb-10">
+      
+      <!-- Brand column -->
+      <div class="space-y-3 max-w-md">
+        <a href="/" class="flex items-center gap-2 font-bold text-xl text-foreground">
+          <div class="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-black text-sm">
+            L
+          </div>
+          <span>Larisken<span class="text-primary font-black">.id</span></span>
+        </a>
+        <p class="text-sm leading-relaxed">
+          <strong>Solusi Praktis Jualan Online</strong>. Membantu UMKM dan toko lokal memiliki website pemesanan sendiri dengan hitung ongkir otomatis & terhubung langsung ke aplikasi toko.
+        </p>
+        <p class="text-xs text-muted-foreground flex items-center gap-1.5 pt-1">
+          <ShieldCheck class="size-4 text-primary" />
+          Mendukung digitalisasi & kemandirian UMKM di Indonesia
+        </p>
+      </div>
+
+      <!-- Navigation links -->
+      <div class="space-y-3">
+        <h4 class="font-semibold text-sm text-foreground">Navigasi</h4>
+        <ul class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
+          <li><a href="#keunggulan" class="hover:text-foreground transition-colors">Keunggulan</a></li>
+          <li><a href="#cara-kerja" class="hover:text-foreground transition-colors">Cara Kerja</a></li>
+          <li><a href="#fitur" class="hover:text-foreground transition-colors">Fitur Unggulan</a></li>
+          <li><a href="#mitra" class="hover:text-foreground transition-colors">List Mitra</a></li>
+          <li><a href="#simulasi-ongkir" class="hover:text-foreground transition-colors">Simulasi Ongkir</a></li>
+          <li><a href="#aplikasi" class="hover:text-foreground transition-colors">Aplikasi Toko</a></li>
+          <li><a href="#faq" class="hover:text-foreground transition-colors">FAQ</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <Separator class="my-6" />
+
+    <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-muted-foreground gap-4">
+      <p>© {new Date().getFullYear()} Larisken.id — Solusi Praktis Jualan Online. Hak cipta dilindungi undang-undang.</p>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:underline">Ketentuan Layanan</a>
+        <a href="#" class="hover:underline">Kebijakan Privasi</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
