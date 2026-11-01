@@ -7,111 +7,93 @@ import CardContent from '@/components/ui/CardContent.astro';
 import CardFooter from '@/components/ui/CardFooter.astro';
 import Badge from '@/components/ui/Badge.astro';
 import Button from '@/components/ui/Button.astro';
-import { Store, ExternalLink, ArrowRight, Sparkles, MapPin } from '@lucide/astro';
+import { ExternalLink, ArrowRight, Sparkles, Store } from '@lucide/astro';
+import { getFeaturedPartners } from '@/lib/partners';
 
-const samplePartners = [
-  {
-    name: "Dapur Pak Slamet",
-    category: "Kuliner & Ayam Bakar",
-    subdomain: "dapurpakslamet.larisken.id",
-    specialty: "Ayam Bakar Madu, Geprek Sambal Matah",
-    initial: "P",
-    color: "bg-emerald-600 text-white"
-  },
-  {
-    name: "Kopi Seduh Berkah",
-    category: "Kopi & Minuman",
-    subdomain: "kopiberkah.larisken.id",
-    specialty: "Es Kopi Susu Gula Aren, Matcha Latte",
-    initial: "K",
-    color: "bg-amber-600 text-white"
-  },
-  {
-    name: "Bakery Roti Mantap",
-    category: "Roti & Pastry",
-    subdomain: "rotimantap.larisken.id",
-    specialty: "Roti Sobek Keju, Donat Kampung",
-    initial: "R",
-    color: "bg-orange-600 text-white"
-  },
-  {
-    name: "Dimsum & Frozen Makmur",
-    category: "Frozen Food & Camilan",
-    subdomain: "frozenmakmur.larisken.id",
-    specialty: "Dimsum Ayam Udang, Lumpia Kulit Tahu",
-    initial: "D",
-    color: "bg-teal-600 text-white"
-  }
-];
+const partners = await getFeaturedPartners();
 ---
 
-<section id="mitra" class="py-16 md:py-24 border-t border-border/60 bg-muted/30">
-  <div class="container mx-auto max-w-6xl px-4 sm:px-6">
-    
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <Badge variant="secondary" class="mb-3">
-        <Sparkles class="size-3.5 text-primary mr-1" /> Direktori Mitra Larisken.id
-      </Badge>
-      <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-        Otomatis Dipromosikan di List Mitra Terdaftar
-      </h2>
-      <p class="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
-        Bukan hanya mendapat website toko sendiri, tokomu juga otomatis masuk ke dalam list mitra resmi di web <span class="font-semibold text-foreground">Larisken.id</span>. Pelanggan dapat langsung menemukan tokomu dan berbelanja!
-      </p>
-    </div>
-
-    <!-- Partner Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {samplePartners.map((partner) => (
-        <Card class="border-border bg-card flex flex-col justify-between hover:shadow-md transition-shadow">
-          <CardHeader class="pb-3">
-            <div class="flex items-center justify-between mb-3">
-              <div class={`size-10 rounded-xl ${partner.color} flex items-center justify-center font-bold text-base shadow-sm`}>
-                {partner.initial}
-              </div>
-              <Badge variant="outline" class="text-[10px] text-emerald-600 border-emerald-300 bg-emerald-50">
-                ● Mitra Aktif
-              </Badge>
-            </div>
-            <CardTitle class="text-base font-bold">{partner.name}</CardTitle>
-            <CardDescription class="text-xs">{partner.category}</CardDescription>
-          </CardHeader>
-          
-          <CardContent class="py-2 flex-1">
-            <p class="text-xs text-muted-foreground line-clamp-2">
-              <span class="font-medium text-foreground">Menu:</span> {partner.specialty}
-            </p>
-            <div class="mt-3 rounded-lg bg-muted/50 px-2.5 py-1.5 text-[11px] font-mono text-primary truncate">
-              https://{partner.subdomain}
-            </div>
-          </CardContent>
-
-          <CardFooter class="pt-3 border-t border-border/60">
-            <Button variant="ghost" size="sm" as="a" href="#daftar" class="w-full justify-between text-xs font-semibold text-primary hover:text-primary">
-              <span>Buka Toko Seperti Ini</span>
-              <ArrowRight data-icon="inline-end" />
-            </Button>
-          </CardFooter>
-        </Card>
-      ))}
-    </div>
-
-    <!-- Banner Callout Below Grid -->
-    <div class="mt-10 rounded-xl border border-primary/20 bg-primary/5 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="space-y-1 text-center sm:text-left">
-        <h4 class="font-bold text-sm sm:text-base text-foreground">
-          Ingin tokomu tampil di list mitra terdaftar ini?
-        </h4>
-        <p class="text-xs sm:text-sm text-muted-foreground">
-          Daftar sekarang, gratis 1 bulan pertama dan toko Anda langsung dipromosikan di portal Larisken.id.
+{partners.length > 0 && (
+  <section id="mitra" class="py-16 md:py-24 border-t border-border/60 bg-muted/30">
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6">
+      
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
+          Mitra Pilihan yang Telah Bergabung
+        </h2>
+        <p class="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
+          Toko-toko berikut telah menggunakan website pemesanan mandiri Larisken.id untuk melayani pelanggan tanpa antre dan bebas potongan komisi.
         </p>
       </div>
-      <Button as="a" href="#daftar" class="shrink-0 shadow-sm">
-        Daftarkan Tokomu Sekarang
-        <ArrowRight data-icon="inline-end" />
-      </Button>
+
+      <!-- Partner Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {partners.map((partner) => {
+          const storeUrl = `https://${partner.slug}.larisken.id`;
+          const initial = partner.name?.charAt(0) || 'T';
+          const isImageLogo = partner.logo && partner.logo.startsWith('http');
+          
+          return (
+            <Card class="border-border bg-card flex flex-col justify-between hover:shadow-lg transition-all duration-200 group text-center p-6">
+              <div>
+                <!-- Centered & Larger Logo -->
+                <div class="mx-auto mb-5 size-24 rounded-2xl bg-muted/60 border border-border/80 flex items-center justify-center overflow-hidden shadow-xs group-hover:scale-105 transition-transform">
+                  {isImageLogo ? (
+                    <img 
+                      src={partner.logo!} 
+                      alt={partner.name} 
+                      class="size-full object-cover" 
+                      loading="lazy"
+                    />
+                  ) : partner.logo ? (
+                    <span class="text-4xl">{partner.logo}</span>
+                  ) : (
+                    <div class="size-full bg-primary/10 text-primary font-black text-3xl flex items-center justify-center">
+                      {initial}
+                    </div>
+                  )}
+                </div>
+
+                <!-- Store Name -->
+                <h3 class="text-lg font-bold text-foreground group-hover:text-primary transition-colors tracking-tight">
+                  {partner.name}
+                </h3>
+
+                <!-- Tagline -->
+                <p class="text-xs text-muted-foreground line-clamp-2 min-h-[34px] mt-1.5 leading-relaxed">
+                  {partner.tagline || 'Toko online resmi mitra Larisken.id'}
+                </p>
+              </div>
+
+              <!-- Action Link directly to Web Toko -->
+              <div class="mt-6 pt-4 border-t border-border/60">
+                <a 
+                  href={storeUrl}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-primary/10 py-2.5 text-xs font-bold text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 group/btn"
+                >
+                  <span>Kunjungi Web Toko</span>
+                  <ExternalLink class="size-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+                </a>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
+
+      <!-- Banner Callout Below Grid -->
+      <div class="mt-12 rounded-2xl border border-primary/20 bg-primary/5 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="space-y-1 text-center sm:text-left">
+          <h4 class="font-bold text-foreground text-sm sm:text-base">Ingin tokomu tampil di halaman utama Larisken.id?</h4>
+          <p class="text-xs sm:text-sm text-muted-foreground">Daftarkan tokomu sekarang dan dapatkan website siap pakai dalam hitungan menit.</p>
+        </div>
+        <Button size="sm" as="a" href="#daftar" class="shrink-0 font-semibold shadow-xs">
+          <span>Buka Toko Sekarang</span>
+          <ArrowRight data-icon="inline-end" />
+        </Button>
+      </div>
+
     </div>
-
-  </div>
-</section>
-
+  </section>
+)}
