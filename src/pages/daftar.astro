@@ -21,6 +21,10 @@ import {
   XCircle
 } from '@lucide/astro';
 
+import provincesData from '@/data/provinces.json';
+
+const provinces = (provincesData?.data || []).sort((a: any, b: any) => a.name.localeCompare(b.name));
+
 const businessCategories = [
   "Makanan & Minuman (F&B)",
   "Restoran & Cafe",
@@ -239,45 +243,70 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciO
                   </div>
                 </div>
 
-                <!-- 5. Kota & 6. Kategori Usaha (2 Kolom di Desktop) -->
+                <!-- 5. Wilayah: Provinsi & Kota/Kabupaten (2 Kolom) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <!-- Kota -->
+                  <!-- Dropdown Provinsi -->
                   <div class="space-y-1.5">
-                    <label for="kota" class="block text-xs font-bold text-foreground uppercase tracking-wider">
-                      Kota <span class="text-destructive">*</span>
+                    <label for="provinsi" class="block text-xs font-bold text-foreground uppercase tracking-wider">
+                      Provinsi <span class="text-destructive">*</span>
                     </label>
                     <div class="relative">
                       <MapPin class="size-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                      <input 
-                        type="text" 
-                        id="kota" 
-                        name="kota" 
-                        required 
-                        placeholder="Contoh: Palembang" 
-                        class="w-full rounded-xl border border-input bg-background pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-xs"
-                      />
-                    </div>
-                  </div>
-
-                  <!-- Kategori Usaha -->
-                  <div class="space-y-1.5">
-                    <label for="kategori_usaha" class="block text-xs font-bold text-foreground uppercase tracking-wider">
-                      Kategori Usaha <span class="text-destructive">*</span>
-                    </label>
-                    <div class="relative">
-                      <Tag class="size-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                       <select 
-                        id="kategori_usaha" 
-                        name="kategori_usaha" 
+                        id="provinsi" 
+                        name="provinsi" 
                         required 
                         class="w-full rounded-xl border border-input bg-background pl-10 pr-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-xs appearance-none cursor-pointer"
                       >
-                        <option value="" disabled selected>Pilih kategori...</option>
-                        {businessCategories.map((cat) => (
-                          <option value={cat}>{cat}</option>
+                        <option value="" disabled selected>Pilih Provinsi...</option>
+                        {provinces.map((prov: any) => (
+                          <option value={prov.id} data-name={prov.name}>{prov.name}</option>
                         ))}
                       </select>
                     </div>
+                  </div>
+
+                  <!-- Dropdown Kota / Kabupaten -->
+                  <div class="space-y-1.5">
+                    <label for="kota" class="block text-xs font-bold text-foreground uppercase tracking-wider">
+                      Kota / Kabupaten <span class="text-destructive">*</span>
+                    </label>
+                    <div class="relative">
+                      <MapPin class="size-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <select 
+                        id="kota" 
+                        name="kota" 
+                        required 
+                        disabled
+                        class="w-full rounded-xl border border-input bg-background pl-10 pr-9 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-xs appearance-none cursor-pointer disabled:bg-muted/50 disabled:cursor-not-allowed"
+                      >
+                        <option value="" disabled selected>Pilih Provinsi dulu...</option>
+                      </select>
+                      <div id="kota-loader" class="hidden absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                        <Loader2 class="size-4 text-primary animate-spin" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 6. Kategori Usaha -->
+                <div class="space-y-1.5">
+                  <label for="kategori_usaha" class="block text-xs font-bold text-foreground uppercase tracking-wider">
+                    Kategori Usaha <span class="text-destructive">*</span>
+                  </label>
+                  <div class="relative">
+                    <Tag class="size-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <select 
+                      id="kategori_usaha" 
+                      name="kategori_usaha" 
+                      required 
+                      class="w-full rounded-xl border border-input bg-background pl-10 pr-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-xs appearance-none cursor-pointer"
+                    >
+                      <option value="" disabled selected>Pilih kategori...</option>
+                      {businessCategories.map((cat) => (
+                        <option value={cat}>{cat}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
@@ -361,6 +390,9 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciO
 
   const supabaseUrl = form?.dataset.supabaseUrl || '';
   const supabaseKey = form?.dataset.supabaseKey || '';
+  const inputProvinsi = document.getElementById('provinsi') as HTMLSelectElement | null;
+  const inputKota = document.getElementById('kota') as HTMLSelectElement | null;
+  const kotaLoader = document.getElementById('kota-loader');
 
   let isSubdomainAvailable = true;
   let checkTimeout: any = null;
@@ -455,6 +487,35 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciO
     checkTimeout = setTimeout(() => {
       checkSubdomainAvailability(inputSubdomain.value);
     }, 350);
+  });
+
+  // 3. Load Daftar Kota berdasarkan ID Provinsi (emsifa API)
+  inputProvinsi?.addEventListener('change', async () => {
+    const provId = inputProvinsi.value;
+    if (!provId || !inputKota) return;
+
+    inputKota.disabled = true;
+    inputKota.innerHTML = '<option value="" disabled selected>Memuat kota / kabupaten...</option>';
+    if (kotaLoader) kotaLoader.classList.remove('hidden');
+
+    try {
+      const url = `https://www.emsifa.com/api-wilayah-indonesia/v2/regencies/${provId}.json`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Gagal mengambil daftar kota');
+
+      const json = await res.json();
+      const cities = json?.data || [];
+
+      inputKota.innerHTML = '<option value="" disabled selected>Pilih Kota / Kabupaten...</option>' + 
+        cities.map((city: any) => `<option value="${city.name}">${city.name}</option>`).join('');
+      
+      inputKota.disabled = false;
+    } catch (err) {
+      inputKota.innerHTML = '<option value="" disabled selected>Gagal memuat kota, silakan coba lagi</option>';
+      inputKota.disabled = false;
+    } finally {
+      if (kotaLoader) kotaLoader.classList.add('hidden');
+    }
   });
 
   // 3. Submit Form Pendaftaran
