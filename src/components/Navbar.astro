@@ -33,6 +33,17 @@ import { Store, Smartphone, ArrowRight, Menu, X } from '@lucide/astro';
     </nav>
 
     <!-- Right Actions Desktop -->
+    <div class="hidden sm:flex items-center gap-3">
+      <Button variant="outline" size="sm" as="a" href="#aplikasi" class="font-medium">
+        <Smartphone data-icon="inline-start" />
+        Login Toko
+      </Button>
+      <Button size="sm" as="a" href="/daftar">
+        Buka Toko
+        <ArrowRight data-icon="inline-end" />
+      </Button>
+    </div>
+
     <!-- Mobile Menu Button (Accessible toggle) -->
     <button
       id="mobile-menu-btn"
@@ -64,7 +75,7 @@ import { Store, Smartphone, ArrowRight, Menu, X } from '@lucide/astro';
         <Smartphone data-icon="inline-start" />
         Login Toko
       </Button>
-      <Button as="a" href="#daftar" class="w-full justify-center">
+      <Button as="a" href="/daftar" class="w-full justify-center">
         Buka Toko Gratis Sekarang
       </Button>
     </div>

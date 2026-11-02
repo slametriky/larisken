@@ -1,0 +1,566 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Button from '@/components/ui/Button.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { 
+  Store, 
+  User, 
+  Phone, 
+  Mail, 
+  MapPin, 
+  Tag, 
+  ArrowRight, 
+  Sparkles, 
+  ShieldCheck, 
+  CheckCircle2, 
+  ArrowLeft,
+  Clock,
+  Coins,
+  Globe,
+  Loader2,
+  XCircle
+} from '@lucide/astro';
+
+const businessCategories = [
+  "Makanan & Minuman (F&B)",
+  "Restoran & Cafe",
+  "Roti, Kue & Bakery",
+  "Frozen Food & Camilan",
+  "Fashion & Pakaian",
+  "Kecantikan & Skincare",
+  "Toko Kelontong & Sembako",
+  "Jasa & Lainnya"
+];
+
+const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL || "https://wcalmiziswrscyecllcl.supabase.co";
+const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjYWxtaXppc3dyc2N5ZWNsbGNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNzc2MTksImV4cCI6MjEwNzk1MzYxOX0.cCGOgDctbEg89_M-_4ZDACLXa6Nz_n5Fi662CFwNHio";
+---
+
+<Layout 
+  title="Daftar Toko Baru - Larisken.id" 
+  description="Daftarkan tokomu sekarang di Larisken.id. Dapatkan subdomain toko mandiri otomatis, hitung ongkir otomatis, dan kelola pesanan langsung di aplikasi toko bebas komisi!"
+>
+  <div class="min-h-screen bg-muted/20 flex flex-col justify-between">
+    
+    <!-- Header Minimalis -->
+    <header class="w-full border-b border-border/60 bg-background/95 backdrop-blur">
+      <div class="container mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
+        <a href="/" class="flex items-center gap-2.5 group">
+          <div class="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground font-black text-lg shadow-sm transition-transform group-hover:scale-105">
+            L
+          </div>
+          <span class="text-xl font-bold tracking-tight text-foreground flex items-center">
+            Larisken<span class="text-primary font-black">.id</span>
+          </span>
+        </a>
+
+        <a 
+          href="/" 
+          class="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft class="size-3.5" />
+          <span>Kembali ke Beranda</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 py-10 sm:py-16 px-4 sm:px-6">
+      <div class="container mx-auto max-w-5xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          
+          <!-- Left Column: Value Prop & Onboarding Info -->
+          <div class="lg:col-span-5 space-y-6 pt-2">
+            <div class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-xs font-semibold text-primary">
+              <Sparkles class="size-3.5" />
+              <span>Registrasi Toko Baru</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground leading-tight">
+              Mulai Jualan Online Praktis Tanpa Beban Komisi
+            </h1>
+
+            <p class="text-sm sm:text-base text-muted-foreground leading-relaxed">
+              Isi data tokomu. Subdomain tokomu akan langsung digenerate otomatis dan siap aktif setelah diverifikasi oleh tim kami.
+            </p>
+
+            <div class="space-y-4 pt-2">
+              <div class="flex items-start gap-3">
+                <div class="size-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                  <CheckCircle2 class="size-4" />
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm text-foreground">Web Toko Mandiri Otomatis</h4>
+                  <p class="text-xs text-muted-foreground">Pelanggan bisa langsung belanja tanpa antre lewat link subdomain toko.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="size-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                  <Coins class="size-4" />
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm text-foreground">100% Pembayaran Langsung ke Toko</h4>
+                  <p class="text-xs text-muted-foreground">Uang hasil penjualan langsung masuk rekening/QRIS toko tanpa potongan komisi.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="size-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                  <Clock class="size-4" />
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm text-foreground">Hitung Ongkir & Status Order</h4>
+                  <p class="text-xs text-muted-foreground">Ongkir otomatis terhitung per kilometer dan pembeli dapat memantau status pesanan.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-xl border border-border/80 bg-card p-4 text-xs text-muted-foreground flex items-center gap-3">
+              <ShieldCheck class="size-5 text-primary shrink-0" />
+              <span>Butuh bantuan pendaftaran? Hubungi WhatsApp tim Larisken di <a href="https://wa.me/6281273120226" target="_blank" rel="noopener noreferrer" class="font-bold text-primary hover:underline">081273120226</a>.</span>
+            </div>
+          </div>
+
+          <!-- Right Column: Registration Form Card -->
+          <div class="lg:col-span-7">
+            <div class="rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-xl relative overflow-hidden">
+              <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500"></div>
+
+              <div class="mb-6">
+                <h2 class="text-xl font-bold text-foreground">Formulir Pendaftaran Toko</h2>
+                <p class="text-xs sm:text-sm text-muted-foreground mt-1">Lengkapi data berikut untuk mendaftarkan tokomu.</p>
+              </div>
+
+              <form 
+                id="form-daftar" 
+                class="space-y-4"
+                data-supabase-url={SUPABASE_URL}
+                data-supabase-key={SUPABASE_ANON_KEY}
+              >
+                
+                <!-- 1. Nama Toko -->
+                <div class="space-y-1.5">
+                  <label for="nama_toko" class="block text-xs font-bold text-foreground uppercase tracking-wider">
+                    Nama Toko <span class="text-destructive">*</span>
+                  </label>
+                  <div class="relative">
+                    <Store class="size-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input 
+                      type="text" 
+                      id="nama_toko" 
+                      name="nama_toko" 
+                      required 
+                      placeholder="Contoh: Dapur Pak Slamet" 
+                      class="w-full rounded-xl border border-input bg-background pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-xs"
+                    />
+                  </div>
+                </div>
+
+                <!-- Subdomain Otomatis (Live check & editable) -->
+                <div class="space-y-1.5">
+                  <div class="flex items-center justify-between">
+                    <label for="subdomain" class="block text-xs font-bold text-foreground uppercase tracking-wider">
+                      Subdomain Toko <span class="text-destructive">*</span>
+                    </label>
+                    <span id="subdomain-status" class="text-[11px] font-medium hidden"></span>
+                  </div>
+                  <div class="relative flex items-center rounded-xl border border-input bg-background pl-10 pr-3 py-1.5 shadow-xs focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary">
+                    <Globe class="size-4 text-muted-foreground absolute left-3.5 pointer-events-none" />
+                    <input 
+                      type="text" 
+                      id="subdomain" 
+                      name="subdomain" 
+                      required 
+                      placeholder="namatoko" 
+                      class="w-full bg-transparent py-1 text-sm font-semibold text-foreground focus:outline-none lowercase placeholder:text-muted-foreground/50 placeholder:font-normal"
+                    />
+                    <span class="text-xs font-bold text-primary select-none shrink-0 pl-1">.larisken.id</span>
+                  </div>
+                  <p class="text-[11px] text-muted-foreground">
+                    Otomatis dibuat dari nama toko. Huruf kecil, angka, dan tanpa spasi.
+                  </p>
+                </div>
+
+                <!-- 2. Pemilik Toko -->
+                <div class="space-y-1.5">
+                  <label for="pemilik_toko" class="block text-xs font-bold text-foreground uppercase tracking-wider">
+                    Pemilik Toko <span class="text-destructive">*</span>
+                  </label>
+                  <div class="relative">
+                    <User class="size-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input 
+                      type="text" 
+                      id="pemilik_toko" 
+                      name="pemilik_toko" 
+                      required 
+                      placeholder="Contoh: Slamet Riyadi" 
+                      class="w-full rounded-xl border border-input bg-background pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-xs"
+                    />
+                  </div>
+                </div>
+
+                <!-- 3. No WA & 4. Email (2 Kolom di Desktop) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <!-- No WhatsApp -->
+                  <div class="space-y-1.5">
+                    <label for="no_wa" class="block text-xs font-bold text-foreground uppercase tracking-wider">
+                      No. WhatsApp <span class="text-destructive">*</span>
+                    </label>
+                    <div class="relative">
+                      <Phone class="size-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input 
+                        type="tel" 
+                        id="no_wa" 
+                        name="no_wa" 
+                        required 
+                        placeholder="Contoh: 081234567890" 
+                        class="w-full rounded-xl border border-input bg-background pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-xs"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Email -->
+                  <div class="space-y-1.5">
+                    <label for="email" class="block text-xs font-bold text-foreground uppercase tracking-wider">
+                      Email Toko / Pemilik <span class="text-destructive">*</span>
+                    </label>
+                    <div class="relative">
+                      <Mail class="size-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        required 
+                        placeholder="Contoh: dapur@gmail.com" 
+                        class="w-full rounded-xl border border-input bg-background pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-xs"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 5. Kota & 6. Kategori Usaha (2 Kolom di Desktop) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <!-- Kota -->
+                  <div class="space-y-1.5">
+                    <label for="kota" class="block text-xs font-bold text-foreground uppercase tracking-wider">
+                      Kota <span class="text-destructive">*</span>
+                    </label>
+                    <div class="relative">
+                      <MapPin class="size-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input 
+                        type="text" 
+                        id="kota" 
+                        name="kota" 
+                        required 
+                        placeholder="Contoh: Palembang" 
+                        class="w-full rounded-xl border border-input bg-background pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-xs"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Kategori Usaha -->
+                  <div class="space-y-1.5">
+                    <label for="kategori_usaha" class="block text-xs font-bold text-foreground uppercase tracking-wider">
+                      Kategori Usaha <span class="text-destructive">*</span>
+                    </label>
+                    <div class="relative">
+                      <Tag class="size-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <select 
+                        id="kategori_usaha" 
+                        name="kategori_usaha" 
+                        required 
+                        class="w-full rounded-xl border border-input bg-background pl-10 pr-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-xs appearance-none cursor-pointer"
+                      >
+                        <option value="" disabled selected>Pilih kategori...</option>
+                        {businessCategories.map((cat) => (
+                          <option value={cat}>{cat}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Error message bar -->
+                <div id="error-bar" class="hidden rounded-xl border border-destructive/20 bg-destructive/10 p-3 text-xs font-semibold text-destructive"></div>
+
+                <!-- Info Ketentuan Singkat -->
+                <p class="text-[11px] text-muted-foreground pt-1">
+                  Status toko akan didaftarkan dan tim kami akan segera menghubungi Anda melalui WhatsApp untuk proses verifikasi & pengaktifan akun toko.
+                </p>
+
+                <!-- Tombol Submit -->
+                <div class="pt-2">
+                  <Button 
+                    id="btn-submit"
+                    type="submit" 
+                    size="lg" 
+                    class="w-full justify-center text-sm sm:text-base font-bold shadow-md cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    <span id="btn-submit-text">Daftarkan Toko Sekarang</span>
+                    <ArrowRight data-icon="inline-end" id="btn-submit-icon" />
+                  </Button>
+                </div>
+              </form>
+
+              <!-- State Sukses (Hidden by default) -->
+              <div id="sukses-box" class="hidden text-center py-8 space-y-4">
+                <div class="size-16 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center mx-auto">
+                  <CheckCircle2 class="size-8" />
+                </div>
+                <h3 class="text-xl font-bold text-foreground">Pendaftaran Berhasil Dikirim!</h3>
+                <p class="text-xs sm:text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
+                  Toko <strong id="registered-store-name" class="text-foreground"></strong> berhasil didaftarkan dengan subdomain <strong id="registered-subdomain" class="text-primary font-mono"></strong> (status: <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800">Menunggu Verifikasi</span>).
+                </p>
+                <p class="text-xs text-muted-foreground">
+                  Kami telah menyiapkan pesan WhatsApp untuk konfirmasi aktivasi ke Admin Larisken:
+                </p>
+                <div class="pt-2">
+                  <a 
+                    id="btn-wa-confirm" 
+                    href="https://wa.me/6281273120226" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-emerald-700 shadow-sm transition-colors"
+                  >
+                    <span>Konfirmasi ke WhatsApp Admin</span>
+                    <ArrowRight class="size-4" />
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Sederhana -->
+    <footer class="border-t border-border/60 bg-background py-6 text-center text-xs text-muted-foreground">
+      <div class="container mx-auto px-4">
+        <p>&copy; {new Date().getFullYear()} Larisken.id. Solusi Praktis Jualan Online Bebas Komisi.</p>
+      </div>
+    </footer>
+
+  </div>
+</Layout>
+
+<script>
+  const form = document.getElementById('form-daftar') as HTMLFormElement | null;
+  const inputNama = document.getElementById('nama_toko') as HTMLInputElement | null;
+  const inputSubdomain = document.getElementById('subdomain') as HTMLInputElement | null;
+  const subdomainStatus = document.getElementById('subdomain-status');
+  const errorBar = document.getElementById('error-bar');
+  const btnSubmit = document.getElementById('btn-submit') as HTMLButtonElement | null;
+  const btnSubmitText = document.getElementById('btn-submit-text');
+  const suksesBox = document.getElementById('sukses-box');
+  const btnWaConfirm = document.getElementById('btn-wa-confirm') as HTMLAnchorElement | null;
+  const registeredStoreName = document.getElementById('registered-store-name');
+  const registeredSubdomain = document.getElementById('registered-subdomain');
+
+  const supabaseUrl = form?.dataset.supabaseUrl || '';
+  const supabaseKey = form?.dataset.supabaseKey || '';
+
+  let isSubdomainAvailable = true;
+  let checkTimeout: any = null;
+  let hasUserManuallyEditedSubdomain = false;
+
+  // Format string menjadi slug valid
+  function slugify(text: string) {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]/g, '') // hanya alphanumeric tanpa spasi/simbol
+      .slice(0, 30);
+  }
+
+  // Cek ketersediaan subdomain ke Supabase
+  async function checkSubdomainAvailability(slug: string) {
+    if (!slug) {
+      if (subdomainStatus) subdomainStatus.className = 'hidden';
+      isSubdomainAvailable = false;
+      return;
+    }
+
+    if (slug.length < 3) {
+      if (subdomainStatus) {
+        subdomainStatus.className = 'text-[11px] font-semibold text-amber-600 block';
+        subdomainStatus.textContent = 'Minimal 3 karakter';
+      }
+      isSubdomainAvailable = false;
+      return;
+    }
+
+    if (subdomainStatus) {
+      subdomainStatus.className = 'text-[11px] font-semibold text-muted-foreground block';
+      subdomainStatus.textContent = 'Memeriksa ketersediaan...';
+    }
+
+    try {
+      const url = `${supabaseUrl}/rest/v1/stores?select=id&slug=eq.${encodeURIComponent(slug)}`;
+      const res = await fetch(url, {
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error('Gagal memeriksa database');
+      }
+
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) {
+        // Sudah dipakai
+        isSubdomainAvailable = false;
+        if (subdomainStatus) {
+          subdomainStatus.className = 'text-[11px] font-semibold text-destructive block';
+          subdomainStatus.textContent = '✕ Subdomain sudah dipakai';
+        }
+      } else {
+        // Tersedia
+        isSubdomainAvailable = true;
+        if (subdomainStatus) {
+          subdomainStatus.className = 'text-[11px] font-semibold text-emerald-600 block';
+          subdomainStatus.textContent = '✓ Subdomain tersedia';
+        }
+      }
+    } catch (err) {
+      // Jika offline atau error jaringan
+      isSubdomainAvailable = true;
+      if (subdomainStatus) subdomainStatus.className = 'hidden';
+    }
+  }
+
+  // 1. Auto-generate subdomain saat Nama Toko diketik
+  inputNama?.addEventListener('input', () => {
+    if (!hasUserManuallyEditedSubdomain && inputSubdomain) {
+      const generatedSlug = slugify(inputNama.value);
+      inputSubdomain.value = generatedSlug;
+
+      clearTimeout(checkTimeout);
+      checkTimeout = setTimeout(() => {
+        checkSubdomainAvailability(generatedSlug);
+      }, 350);
+    }
+  });
+
+  // 2. User mengedit subdomain secara manual
+  inputSubdomain?.addEventListener('input', () => {
+    hasUserManuallyEditedSubdomain = true;
+    inputSubdomain.value = slugify(inputSubdomain.value);
+
+    clearTimeout(checkTimeout);
+    checkTimeout = setTimeout(() => {
+      checkSubdomainAvailability(inputSubdomain.value);
+    }, 350);
+  });
+
+  // 3. Submit Form Pendaftaran
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (errorBar) errorBar.classList.add('hidden');
+
+    const formData = new FormData(form);
+    const namaToko = (formData.get('nama_toko') as string || '').trim();
+    const slug = slugify(formData.get('subdomain') as string || '');
+    const pemilikToko = (formData.get('pemilik_toko') as string || '').trim();
+    const noWa = (formData.get('no_wa') as string || '').trim();
+    const email = (formData.get('email') as string || '').trim();
+    const kota = (formData.get('kota') as string || '').trim();
+    const kategori = (formData.get('kategori_usaha') as string || '').trim();
+
+    if (!slug || slug.length < 3) {
+      if (errorBar) {
+        errorBar.textContent = 'Subdomain toko minimal 3 karakter huruf atau angka.';
+        errorBar.classList.remove('hidden');
+      }
+      return;
+    }
+
+    if (!isSubdomainAvailable) {
+      if (errorBar) {
+        errorBar.textContent = `Subdomain "${slug}.larisken.id" sudah dipakai oleh toko lain. Silakan ubah subdomain Anda.`;
+        errorBar.classList.remove('hidden');
+      }
+      return;
+    }
+
+    // Ubah status tombol loading
+    if (btnSubmit) btnSubmit.disabled = true;
+    if (btnSubmitText) btnSubmitText.textContent = 'Mendaftarkan toko...';
+
+    try {
+      // Simpan ke Supabase table 'stores' dengan is_active = false
+      const storePayload = {
+        name: namaToko,
+        slug: slug,
+        custom_domain: `https://${slug}.larisken.id/`,
+        is_active: false, // Belum aktif
+        is_featured: false,
+        owner_name: pemilikToko,
+        whatsapp: noWa,
+        email: email,
+        city: kota,
+        business_category: kategori,
+      };
+
+      const res = await fetch(`${supabaseUrl}/rest/v1/stores`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          Prefer: 'return=representation',
+        },
+        body: JSON.stringify(storePayload),
+      });
+
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => null);
+        if (errJson?.message?.includes('stores_slug_key') || errJson?.code === '23505') {
+          throw new Error(`Subdomain "${slug}" sudah dipakai oleh toko lain.`);
+        }
+        throw new Error(errJson?.message || 'Gagal menyimpan data toko ke sistem.');
+      }
+
+      // Buat format pesan WhatsApp
+      const waText = encodeURIComponent(
+        `Halo Tim Larisken.id, saya baru saja mendaftarkan toko baru:\n\n` +
+        `*Nama Toko:* ${namaToko}\n` +
+        `*Subdomain:* https://${slug}.larisken.id\n` +
+        `*Pemilik Toko:* ${pemilikToko}\n` +
+        `*No. WhatsApp:* ${noWa}\n` +
+        `*Email:* ${email}\n` +
+        `*Kota:* ${kota}\n` +
+        `*Kategori Usaha:* ${kategori}\n` +
+        `*Status:* Menunggu Aktivasi\n\n` +
+        `Mohon dibantu untuk proses verifikasi dan aktivasi akun toko saya. Terima kasih!`
+      );
+
+      const waUrl = `https://wa.me/6281273120226?text=${waText}`;
+
+      if (btnWaConfirm) btnWaConfirm.href = waUrl;
+      if (registeredStoreName) registeredStoreName.textContent = namaToko;
+      if (registeredSubdomain) registeredSubdomain.textContent = `${slug}.larisken.id`;
+
+      // Tampilkan box sukses
+      form.classList.add('hidden');
+      suksesBox?.classList.remove('hidden');
+
+      // Buka WA secara otomatis
+      setTimeout(() => {
+        window.open(waUrl, '_blank');
+      }, 700);
+
+    } catch (err: any) {
+      if (btnSubmit) btnSubmit.disabled = false;
+      if (btnSubmitText) btnSubmitText.textContent = 'Daftarkan Toko Sekarang';
+      if (errorBar) {
+        errorBar.textContent = err?.message || 'Terjadi kesalahan saat pendaftaran. Silakan coba lagi.';
+        errorBar.classList.remove('hidden');
+      }
+    }
+  });
+</script>
