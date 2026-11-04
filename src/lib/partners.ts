@@ -4,6 +4,8 @@ export interface FeaturedPartner {
   id: string;
   name: string;
   slug: string;
+  city: string | null;
+  business_category: string | null;
   is_featured: boolean;
   logo: string | null;
   tagline: string | null;
@@ -14,7 +16,7 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciO
 
 export async function getFeaturedPartners(): Promise<FeaturedPartner[]> {
   try {
-    const url = `${SUPABASE_URL}/rest/v1/stores?select=id,name,slug,is_featured,settings(logo,tagline)&is_featured=eq.true&is_active=eq.true&order=created_at.desc`;
+    const url = `${SUPABASE_URL}/rest/v1/stores?select=id,name,slug,city,business_category,is_featured,settings(logo,tagline)&is_featured=eq.true&is_active=eq.true&order=created_at.desc`;
     
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 3500);
@@ -38,6 +40,8 @@ export async function getFeaturedPartners(): Promise<FeaturedPartner[]> {
             id: item.id,
             name: item.name,
             slug: item.slug,
+            city: item.city || null,
+            business_category: item.business_category || null,
             is_featured: item.is_featured,
             logo: setting?.logo || null,
             tagline: setting?.tagline || null,

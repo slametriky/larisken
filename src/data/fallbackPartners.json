@@ -3,17 +3,20 @@
     "id": "401458be-4656-4059-9652-e6f0fda28a0f",
     "name": "Wafa Brownies",
     "slug": "wafabrownies",
+    "city": "Kota Palembang",
+    "business_category": "Roti, Kue & Bakery",
     "is_featured": true,
     "logo": "https://wcalmiziswrscyecllcl.supabase.co/storage/v1/object/public/logos/logo_1793289368429.png",
-    "tagline": "Brownies Panggang Fudgy & Bolu Lembut Premium"
+    "tagline": "Lumer rasanya, nagih nikmatnya"
   },
   {
     "id": "a5170304-834a-4d0b-9a95-5df585d6e72a",
     "name": "Raja Corndog",
     "slug": "rajacorndog",
+    "city": "Kota Palembang",
+    "business_category": "Makanan & Minuman (F&B)",
     "is_featured": true,
     "logo": "https://wcalmiziswrscyecllcl.supabase.co/storage/v1/object/public/logos/logo_1793155982376.jpeg",
     "tagline": "Makanan kekinian"
   }
 ]
-
