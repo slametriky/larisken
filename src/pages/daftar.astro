@@ -553,21 +553,17 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciO
     if (btnSubmitText) btnSubmitText.textContent = 'Mendaftarkan toko...';
 
     try {
-      // Simpan ke Supabase table 'stores' dengan is_active = false
+      // 1. Simpan ke Supabase table 'stores' (identitas, domain, dan kota operasional)
       const storePayload = {
         name: namaToko,
         slug: slug,
         custom_domain: `https://${slug}.larisken.id/`,
-        is_active: false, // Belum aktif
-        is_featured: false,
-        owner_name: pemilikToko,
-        whatsapp: noWa,
-        email: email,
         city: kota,
-        business_category: kategori,
+        is_active: false, // Belum aktif (menunggu verifikasi)
+        is_featured: false,
       };
 
-      const res = await fetch(`${supabaseUrl}/rest/v1/stores`, {
+      const resStore = await fetch(`${supabaseUrl}/rest/v1/stores`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -578,12 +574,92 @@ const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciO
         body: JSON.stringify(storePayload),
       });
 
-      if (!res.ok) {
-        const errJson = await res.json().catch(() => null);
+      if (!resStore.ok) {
+        const errJson = await resStore.json().catch(() => null);
         if (errJson?.message?.includes('stores_slug_key') || errJson?.code === '23505') {
           throw new Error(`Subdomain "${slug}" sudah dipakai oleh toko lain.`);
         }
         throw new Error(errJson?.message || 'Gagal menyimpan data toko ke sistem.');
+      }
+
+      const createdStores = await resStore.json();
+      const createdStore = Array.isArray(createdStores) ? createdStores[0] : createdStores;
+      const storeId = createdStore?.id;
+
+      if (!storeId) {
+        throw new Error('Gagal mendapatkan ID toko yang baru dibuat.');
+      }
+
+      // Format nomor WhatsApp standar Indonesia (62xxx)
+      let formattedWa = noWa.replace(/\D/g, '');
+      if (formattedWa.startsWith('0')) {
+        formattedWa = '62' + formattedWa.slice(1);
+      } else if (!formattedWa.startsWith('62')) {
+        formattedWa = '62' + formattedWa;
+      }
+
+      // 2. Buat akun pemilik toko di tabel 'users' (password = slug)
+      const userPayload = {
+        store_id: storeId,
+        name: pemilikToko,
+        email: email,
+        password: slug, // password sama dengan slug
+        role: 'merchant',
+      };
+
+      const resUser = await fetch(`${supabaseUrl}/rest/v1/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+        },
+        body: JSON.stringify(userPayload),
+      });
+
+      if (!resUser.ok) {
+        const errJson = await resUser.json().catch(() => null);
+        console.error('Gagal membuat user:', errJson);
+      }
+
+      // 3. Buat konfigurasi toko awal di tabel 'settings'
+      const settingsPayload = {
+        store_id: storeId,
+        store_name: namaToko,
+        tagline: `${kategori} Berkualitas & Terpercaya`,
+        whatsapp: formattedWa,
+        address: kota,
+        opening_hours: '08:00 - 21:00 WIB',
+        open_time: '08:00',
+        close_time: '21:00',
+        opening_days: 'Setiap Hari',
+        delivery_fee_per_km: 2500,
+        min_delivery_fee: 5000,
+        is_cash_active: true,
+        is_qris_active: false,
+        is_delivery_active: true,
+        is_banner_active: false,
+        store_status_mode: 'open',
+        logo: '🏪',
+        theme_color: 'emerald',
+        theme_template: 'grid',
+        is_bank_active: false,
+        max_free_toppings: 0,
+      };
+
+      const resSettings = await fetch(`${supabaseUrl}/rest/v1/settings`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+        },
+        body: JSON.stringify(settingsPayload),
+      });
+
+      if (!resSettings.ok) {
+        const errJson = await resSettings.json().catch(() => null);
+        console.error('Gagal membuat settings:', errJson);
       }
 
       // Buat format pesan WhatsApp
